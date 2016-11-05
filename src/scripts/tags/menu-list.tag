@@ -53,6 +53,7 @@ menu-list
 
 		self.year = opts.year;
 		self.month = opts.month;
+		self.word = opts.word || null;
 		
 		self.date = u.date;
 
@@ -63,7 +64,7 @@ menu-list
 			}
 		}
 
-		api.get(self.year, self.month).then(function(data) {
+		api.get(self.year, self.month, self.word).then(function(data) {
 			self.menu = data.items;
 			self.update();
 		});

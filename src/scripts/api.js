@@ -6,8 +6,7 @@ const u = require('./utils');
 let menu = {};
 
 module.exports = {
-	get: (year = u.now.year, month = u.now.month) => {
-		console.log(year, month)
+	get: (year = u.now.year, month = u.now.month, word = null) => {
 		return new Promise((resolve, reject) => {
 			const date = `${year}${u.zero(month)}`;
 			// 取得済みの場合は取得しない
@@ -15,8 +14,10 @@ module.exports = {
 				resolve(menu[date]);
 				return;
 			}
+			const url = word === null ? `http://uswan-api.simo.website/${year}/${u.zero(month)}`
+									  : `http://uswan-api.simo.website/${year}/${u.zero(month)}/${word}`;
 			request
-				.get(`http://localhost:4301/${year}/${u.zero(month)}`)
+				.get(url)
 				.end((err, res) => {
 					if(err) {
 						reject(err);
@@ -34,9 +35,8 @@ module.exports = {
 				return;
 			}
 			request
-				.get(`http://localhost:4301/archive`)
+				.get(`http://uswan-api.simo.website/archive`)
 				.end((err, res) => {
-					console.log(err)
 					if(err) {
 						reject(err);
 						return;

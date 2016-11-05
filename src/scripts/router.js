@@ -22,6 +22,16 @@ riot.route('/archive/*/*', (year, month) => {
 	});
 });
 
+riot.route('/search/*/*/*', (word, year, month) => {
+	require('./tags/search');
+
+	riot.mount('route', 'search', {
+		word,
+		year,
+		month
+	});
+});
+
 module.exports = {
 	start: function() {
 		riot.route.start(true);

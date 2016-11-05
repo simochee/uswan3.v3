@@ -7,6 +7,8 @@ footer-nav
 			li(each="{item in archive}" if="{!(item.year == u.now.year && item.month == u.now.month)}")
 				btn(href="#/archive/{item.year}/{item.month}" text="{item.year}年{item.month}月")
 
+	btn(icons="{['ios-search']}" text="検索" onclick="{toggleSearchForm}")
+
 	
 
 	script.
